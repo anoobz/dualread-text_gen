@@ -1,0 +1,12 @@
+{
+  "be": ["am", "is", "are"],
+  "have": ["have", "has"],
+  "do": ["do", "does"],
+  "say": ["say", "says"],
+  "get": ["get", "gets"],
+  "make": ["make", "makes"],
+  "go": ["go", "goes"],
+  "know": ["know", "knows"],
+  "take": ["take", "takes"],
+  "see": ["see", "sees"]
+}

@@ -1,0 +1,7 @@
+{
+  "be": ["am", "is", "are"],
+  "have": ["have", "has"],
+  "do": ["do", "does"],
+  "say": ["say", "says"],
+  "get": ["get", "gets"]
+}

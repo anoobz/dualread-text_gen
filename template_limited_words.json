@@ -1,0 +1,45 @@
+[
+  {
+    "sentence": "|0 is |1.",
+    "options": [
+      ["it", "that", "this"],
+      [
+        "time",
+        "a person",
+        "the year",
+        "the day",
+        "the first",
+        "the last",
+        "the way"
+      ]
+    ]
+  },
+  {
+    "sentence": "|0 have |1.",
+    "options": [
+      ["i", "you"],
+      ["time", "a person", "a year", "a day", "the first", "the last"]
+    ]
+  },
+  {
+    "sentence": "|0 have |1.",
+    "options": [
+      ["we", "they"],
+      ["time", "a person", "a year", "a day", "the first", "the last"]
+    ]
+  },
+  {
+    "sentence": "this |0 is |1.",
+    "options": [
+      ["year", "day", "way"],
+      ["long", "new", "good"]
+    ]
+  },
+  {
+    "sentence": "|0 get |1.",
+    "options": [
+      ["i", "you", "we", "they"],
+      ["a good day", "a new person", "the first one", "the last one"]
+    ]
+  }
+]

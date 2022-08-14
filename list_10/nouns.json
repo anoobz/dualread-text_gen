@@ -1,0 +1,12 @@
+{
+  "time": ["time", "times"],
+  "person": ["person", "persons"],
+  "year": ["year", "years"],
+  "way": ["way", "ways"],
+  "day": ["day", "days"],
+  "thing": ["thing", "things"],
+  "man": ["man", "men"],
+  "world": ["world", "worlds"],
+  "life": ["life", "lifes"],
+  "hand": ["hand", "hands"]
+}
