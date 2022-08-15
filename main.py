@@ -1,5 +1,12 @@
-import json, random, re, sys
+import json, random, re
+from dotenv import load_dotenv
 from typing import Any, Optional
+
+from models.translation import Translation
+from mongodb import MongoDatabase
+from translate_client import TranslateClient
+
+load_dotenv()
 
 
 def load_template_file(file_path: str) -> list[dict[str, Any]]:
@@ -92,11 +99,54 @@ def analyze_generation(file_name: str):
     with open(file_name, "r") as f:
         text = f.read()
 
-    word_set = set(re.split(r"[\W\d_]+", text))
+    word_set = set([word.lower() for word in re.split(r"[\W\d_]+", text)])
     word_counts = get_word_counts(text, ["verbs", "nouns", "adjectives"], limit=5)
     print(f"Unique word count: {len(word_set)}")
     print(word_set)
     print(word_counts)
+
+
+def get_sentence_char_counts(
+    text: str, total_char_count: dict[str, int]
+) -> dict[str, dict[str, int]]:
+    sentence_char_counts = {}
+    trimed_text = re.sub(r"[^\w \n]", "", text, flags=re.UNICODE)
+    sentence_list = re.split(r"\n", trimed_text, flags=re.UNICODE)
+    for sentence in sentence_list:
+        temp_char_counts = {}
+        for char in sentence:
+            temp_char_counts[char] = total_char_count.get(char, 0)
+
+        sentence_char_counts[sentence] = dict(
+            sorted(temp_char_counts.items(), key=lambda count: count[1], reverse=True)
+        )
+
+    return sentence_char_counts
+
+
+def check_sentence_counts(
+    char_counts: dict[str, int], char_count_threshold: int
+) -> bool:
+    for count in char_counts.values():
+        if count <= char_count_threshold:
+            return False
+    return True
+
+
+def filter_sentences(file_name: str, char_count_threshold: int):
+    with open(file_name, "r") as f:
+        text = f.read()
+
+    sorted_char_counts = get_sorted_char_count(text)
+    sentence_char_counts = get_sentence_char_counts(text, sorted_char_counts)
+    sentence_list = [
+        sentence
+        for sentence, char_counts in sentence_char_counts.items()
+        if check_sentence_counts(char_counts, char_count_threshold)
+    ]
+
+    with open("filtered_translated_sentences.txt", "w") as f:
+        f.write("。\n".join(sentence_list))
 
 
 def analyze_translation(file_name: str):
@@ -107,19 +157,12 @@ def analyze_translation(file_name: str):
     print(f"Char count: {len(sorted_char_counts)}")
     print(sorted_char_counts)
 
+    sentence_char_counts = get_sentence_char_counts(text, sorted_char_counts)
 
-def analyze_all():
-    analyze_generation("generated_sentences.txt")
-    analyze_translation("translated_zh.txt")
+    with open("translation_counts.json", "w") as f:
+        f.write(json.dumps(sentence_char_counts, ensure_ascii=False))
 
 
 if __name__ == "__main__":
-    command = sys.argv[1]
-    params = sys.argv[2:]
-
-    if command == "gen":
-        generate(int(params[0]))
-    elif command == "a_gen":
-        analyze_generation(params[0])
-    elif command == "a_tran":
-        analyze_translation(params[0])
+    translate_client = TranslateClient()
+    print(translate_client.translate("I am a cat", "en", "fr"))

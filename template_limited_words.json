@@ -39,7 +39,29 @@
     "sentence": "|0 get |1.",
     "options": [
       ["i", "you", "we", "they"],
-      ["a good day", "a new person", "the first one", "the last one"]
+      ["a day", "a person", "one"]
+    ]
+  },
+  {
+    "sentence": "|0 |1 |2.",
+    "options": [
+      ["i", "you", "we", "they"],
+      ["do", "say"],
+      ["this year", "it this way", "one time"]
+    ]
+  },
+  {
+    "sentence": "|0 are |2 persons.",
+    "options": [
+      ["we", "you", "they"],
+      ["two", "three", "four"]
+    ]
+  },
+  {
+    "sentence": "|0 have |2 days.",
+    "options": [
+      ["i", "you", "we", "they"],
+      ["five", "six", "seven"]
     ]
   }
 ]
