@@ -1,111 +1,80 @@
-We have |2 days.
-I have a day.
-That is the way.
-This day is long.
-You get a person.
-I say one time.
-They get a day.
-This is a person.
-They have the last.
-I get a day.
-We do it this way.
-They have a day.
-This is the first.
-They get a person.
-They are |2 persons.
-They have the first.
-We have a day.
-You do this year.
-They say this year.
-This year is good.
-They have time.
-I do one time.
-We have the first.
-This day is good.
-I say this year.
-They are |2 persons.
-I do this year.
 It is time.
-You say one time.
-You are |2 persons.
-We have the last.
-You get one.
-They are |2 persons.
-This is time.
-I have the last.
-You have the last.
-This is the year.
-They do this year.
-This is the way.
-We are |2 persons.
-You have |2 days.
-That is a person.
-That is the last.
-You say this year.
-You have a person.
-We are |2 persons.
-This day is new.
-We have a person.
-We say one time.
-This way is long.
-We get one.
-You are |2 persons.
-You have |2 days.
-That is time.
-You do it this way.
-This way is new.
-I have a year.
-It is the way.
-They have a person.
-They say it this way.
-This way is good.
-We do this year.
-It is the year.
-We have |2 days.
-You do one time.
-They have |2 days.
-You have the first.
-This is the last.
-This is the day.
-You have a year.
-I have |2 days.
-They have a year.
-I do it this way.
-We have a year.
-You have a day.
-That is the first.
-You have time.
-I say it this way.
-They get one.
-It is the first.
-You have |2 days.
-You say it this way.
-I have the first.
-This year is new.
-We get a person.
-I have |2 days.
-That is the day.
 That is the year.
-We do one time.
-They do one time.
-We get a day.
-We have time.
-I have time.
-They do it this way.
-They say one time.
-I get one.
-It is a person.
-We are |2 persons.
-I have |2 days.
-They have |2 days.
-We say this year.
-They have |2 days.
-You are |2 persons.
-You get a day.
-I get a person.
-I have a person.
-We have |2 days.
-This year is long.
-We say it this way.
 It is the last.
-It is the day.
+It is the way.
+I have time.
+You have a year.
+You have a day.
+You have the first.
+You have the last.
+They have time.
+We have a year.
+We have a day.
+They have the first.
+This year is long.
+This day is long.
+This day is new.
+This way is new.
+This way is good.
+I get a day.
+You get a day.
+They get a person.
+I get one.
+You get one.
+We get one.
+They get one.
+I do this year.
+You do this year.
+We do this year.
+They do this year.
+I say this year.
+You say this year.
+We say this year.
+They do it this way.
+I say it this way.
+You say it this way.
+We say it this way.
+I do one time.
+You do one time.
+We do one time.
+I say one time.
+You say one time.
+We say one time.
+We are two persons.
+You are two persons.
+We are three persons.
+You are three persons.
+They are three persons.
+We are four persons.
+They are four persons.
+I have five days.
+You have five days.
+We have five days.
+They have five days.
+I have six days.
+You have six days.
+We have six days.
+They have six days.
+I have seven days.
+You have seven days.
+They have seven days.
+He says this eight times.
+She says this eight times.
+It says this eight times.
+He says this nine times.
+She says this nine times.
+It says this nine times.
+He says this ten times.
+She says this ten times.
+It says this ten times.
+It is a new year.
+This is a new year.
+It is a good day.
+That is a good day.
+This is a good day.
+It is the first person.
+That is the first person.
+This is the first person.
+It is a long time.
+That is a long time.
+This is a long time.

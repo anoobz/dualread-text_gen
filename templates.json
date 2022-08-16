@@ -51,17 +51,31 @@
     ]
   },
   {
-    "sentence": "|0 are |2 persons.",
+    "sentence": "|0 are |1 persons.",
     "options": [
       ["we", "you", "they"],
       ["two", "three", "four"]
     ]
   },
   {
-    "sentence": "|0 have |2 days.",
+    "sentence": "|0 have |1 days.",
     "options": [
       ["i", "you", "we", "they"],
       ["five", "six", "seven"]
+    ]
+  },
+  {
+    "sentence": "|0 says this |1 times.",
+    "options": [
+      ["he", "she", "it"],
+      ["eight", "nine", "ten"]
+    ]
+  },
+  {
+    "sentence": "|0 is |1.",
+    "options": [
+      ["it", "that", "this"],
+      ["a new year", "a good day", "the first person", "a long time"]
     ]
   }
 ]

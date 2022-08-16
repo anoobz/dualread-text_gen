@@ -1,8 +1,8 @@
 import json, random, re
+import math
 from dotenv import load_dotenv
-from typing import Any, Optional
+from typing import Any
 
-from models.translation import Translation
 from mongodb import MongoDatabase
 from translate_client import TranslateClient
 
@@ -14,14 +14,17 @@ def load_template_file(file_path: str) -> list[dict[str, Any]]:
         return json.loads(f.read())
 
 
-def save_sentences_to_file(text: str):
-    with open("generated_sentences.txt", "w") as f:
-        f.write(text)
+def generate_sentences(
+    templates_file_name: str,
+    template_start: int,
+    template_end: int,
+    start_ratio: float,
+    end_ratio: float,
+) -> list[str]:
+    templates = load_template_file(templates_file_name)[template_start:template_end]
 
-
-def generate_sentences(templates: list[dict[str, Any]]) -> list[str]:
     generated_sentences: list[str] = []
-    for template in templates:
+    for idx, template in enumerate(templates):
         # Initialize the template list to the initial sentence template
         unfinished_sentences: list[str] = [template["sentence"]]
         for idx, option_group in enumerate(template["options"]):
@@ -34,7 +37,15 @@ def generate_sentences(templates: list[dict[str, Any]]) -> list[str]:
             # Overide the previous unfinished sentences with the new unfinished sentences
             unfinished_sentences = unfinished_sentences_buffer
         generated_sentences += unfinished_sentences
-    return generated_sentences
+
+    selected_sentences = []
+    for idx, sentence in enumerate(generated_sentences):
+        den = idx * (end_ratio - start_ratio) / len(generated_sentences) + start_ratio
+        mod = idx % (1 / den)
+        if math.floor(mod) == 0:
+            selected_sentences.append(sentence)
+
+    return selected_sentences
 
 
 def count_word(word: str, text: str) -> int:
@@ -63,28 +74,9 @@ def get_word_counts(
     return word_counts
 
 
-def generate_shuffled_sentence_list(limit: Optional[int] = None) -> list[str]:
-    templates = load_template_file("template_limited_words.json")
-
-    if limit:
-        templates = templates[:limit]
-
-    generated_sentences = generate_sentences(templates)
-    random.shuffle(generated_sentences)
-
-    return generated_sentences
-
-
-def generate(limit: Optional[int] = None):
-    generated_sentences = generate_shuffled_sentence_list(limit)
-    print(f"generated {len(generated_sentences)} sentences")
-    generated_text = "\n".join(generated_sentences)
-    save_sentences_to_file(generated_text)
-
-
 def get_sorted_char_count(text: str) -> dict[str, int]:
     char_counts = {}
-    text_characters = re.sub(r"[\W\d_]+", "", text, flags=re.UNICODE)
+    text_characters = re.sub(r"\W+", "", text, flags=re.UNICODE)
     for char in text_characters:
         char_counts[char] = char_counts.get(char, 0) + 1
 
@@ -95,11 +87,8 @@ def get_sorted_char_count(text: str) -> dict[str, int]:
     return sorted_char_counts
 
 
-def analyze_generation(file_name: str):
-    with open(file_name, "r") as f:
-        text = f.read()
-
-    word_set = set([word.lower() for word in re.split(r"[\W\d_]+", text)])
+def analyze_generation(text: str):
+    word_set = set([word.lower() for word in re.split(r"\W+", text)])
     word_counts = get_word_counts(text, ["verbs", "nouns", "adjectives"], limit=5)
     print(f"Unique word count: {len(word_set)}")
     print(word_set)
@@ -110,7 +99,7 @@ def get_sentence_char_counts(
     text: str, total_char_count: dict[str, int]
 ) -> dict[str, dict[str, int]]:
     sentence_char_counts = {}
-    trimed_text = re.sub(r"[^\w \n]", "", text, flags=re.UNICODE)
+    trimed_text = re.sub(r"[^\w\n]", "", text, flags=re.UNICODE)
     sentence_list = re.split(r"\n", trimed_text, flags=re.UNICODE)
     for sentence in sentence_list:
         temp_char_counts = {}
@@ -133,36 +122,73 @@ def check_sentence_counts(
     return True
 
 
-def filter_sentences(file_name: str, char_count_threshold: int):
-    with open(file_name, "r") as f:
-        text = f.read()
-
+def filter_sentences(text: str, char_count_threshold: int, delimiter: str):
     sorted_char_counts = get_sorted_char_count(text)
     sentence_char_counts = get_sentence_char_counts(text, sorted_char_counts)
     sentence_list = [
-        sentence
+        sentence + delimiter
         for sentence, char_counts in sentence_char_counts.items()
         if check_sentence_counts(char_counts, char_count_threshold)
     ]
 
-    with open("filtered_translated_sentences.txt", "w") as f:
-        f.write("。\n".join(sentence_list))
+    return sentence_list
 
 
-def analyze_translation(file_name: str):
-    with open(file_name, "r") as f:
-        text = f.read()
-
+def analyze_translation(text: str):
     sorted_char_counts = get_sorted_char_count(text)
     print(f"Char count: {len(sorted_char_counts)}")
     print(sorted_char_counts)
 
-    sentence_char_counts = get_sentence_char_counts(text, sorted_char_counts)
-
-    with open("translation_counts.json", "w") as f:
-        f.write(json.dumps(sentence_char_counts, ensure_ascii=False))
-
 
 if __name__ == "__main__":
+    mongo_client = MongoDatabase()
     translate_client = TranslateClient()
-    print(translate_client.translate("I am a cat", "en", "fr"))
+    source_language = "en"
+    target_language = "zh-CN"
+    template_start = 0
+    template_end = template_start + 10
+    start_ratio = 0.1
+    end_ratio = 1
+    templates_file_name = "templates.json"
+    generation_file_name = "generated_sentences.txt"
+    translation_file_name = "filtered_translated_sentences.txt"
+    char_count_threshold = 0
+    sentence_delimiter = "。"
+    shuffle = True
+
+    generated_sentences = generate_sentences(
+        templates_file_name, template_start, template_end, start_ratio, end_ratio
+    )
+    with open(generation_file_name, "w") as f:
+        f.write("\n".join(generated_sentences))
+
+    translated_sentences: list[str] = []
+    for sentence in generated_sentences:
+        translation = mongo_client.find_translation(
+            sentence, source_language, target_language
+        )
+        if translation:
+            translated_sentences.append(translation["output"])
+        else:
+            translation = translate_client.translate(
+                sentence, source_language, target_language
+            )
+            mongo_client.insert_translation(
+                sentence, translation, source_language, target_language
+            )
+            translated_sentences.append(translation)
+
+    filtered_sentences = filter_sentences(
+        "\n".join(translated_sentences), char_count_threshold, sentence_delimiter
+    )
+
+    if shuffle:
+        random.shuffle(filtered_sentences)
+
+    print(f"Generated {len(filtered_sentences)} sentences")
+    translations = "\n".join(filtered_sentences)
+    with open(translation_file_name, "w") as f:
+        f.write(translations)
+
+    analyze_generation(" ".join(generated_sentences))
+    analyze_translation(translations)

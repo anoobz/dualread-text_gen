@@ -1,5 +1,5 @@
 import os
-from typing import Optional
+from typing import Any, Optional
 from pymongo import MongoClient, DESCENDING
 from pymongo.collection import Collection
 
@@ -18,7 +18,6 @@ class MongoDatabase:
         password = os.getenv("DB_PASS")
 
         db_uri = f"mongodb://{username}:{password}@{host}:{port}/"
-        print(db_uri)
 
         client = MongoClient(db_uri)
 
@@ -33,12 +32,21 @@ class MongoDatabase:
             ]
         )
 
-    def insert_translation(self, translation: Translation):
-        self.coll.insert_one(translation.dict())
+    def insert_translation(
+        self, input: str, output: str, source_language: str, target_language: str
+    ):
+        self.coll.insert_one(
+            {
+                "input": input,
+                "output": output,
+                "source_language": source_language,
+                "target_language": target_language,
+            }
+        )
 
     def find_translation(
         self, input: str, source_language: str, target_language: str
-    ) -> Optional[Translation]:
+    ) -> Optional[dict[str, Any]]:
         trans = self.coll.find_one(
             {
                 "input": input,
@@ -46,8 +54,8 @@ class MongoDatabase:
                 "target_language": target_language,
             }
         )
-        if trans:
-            return Translation(**trans)
+
+        return trans
 
     def delete_all_translation(self):
         self.coll.delete_many({})
