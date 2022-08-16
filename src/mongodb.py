@@ -3,8 +3,6 @@ from typing import Any, Optional
 from pymongo import MongoClient, DESCENDING
 from pymongo.collection import Collection
 
-from models.translation import Translation
-
 
 class MongoDatabase:
     coll: Collection
