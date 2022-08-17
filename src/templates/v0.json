@@ -29,10 +29,11 @@
     ]
   },
   {
-    "sentence": "this |0 is |1.",
+    "sentence": "|2 |0 is |1.",
     "options": [
       ["year", "day", "way"],
-      ["long", "new", "good"]
+      ["long", "new", "good"],
+      ["this", "that"]
     ]
   },
   {
@@ -47,14 +48,14 @@
     "options": [
       ["i", "you", "we", "they"],
       ["do", "say"],
-      ["this year", "it this way", "one time"]
+      ["this", "so", "one time"]
     ]
   },
   {
     "sentence": "|0 are |1 persons.",
     "options": [
       ["we", "you", "they"],
-      ["two", "three", "four"]
+      ["two", "three", "four", "five"]
     ]
   },
   {
@@ -65,10 +66,10 @@
     ]
   },
   {
-    "sentence": "|0 says this |1 times.",
+    "sentence": "|0 say this |1 times.",
     "options": [
-      ["he", "she", "it"],
-      ["eight", "nine", "ten"]
+      ["i", "you", "we", "they"],
+      ["seven", "eight", "nine", "ten"]
     ]
   },
   {

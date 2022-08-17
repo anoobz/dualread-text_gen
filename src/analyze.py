@@ -70,7 +70,7 @@ def check_sentence_counts(
     char_counts: dict[str, int], char_count_threshold: int
 ) -> bool:
     for count in char_counts.values():
-        if count <= char_count_threshold:
+        if count < char_count_threshold:
             return False
     return True
 
