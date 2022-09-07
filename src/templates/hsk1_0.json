@@ -1,0 +1,77 @@
+[
+  {
+    "sentence": "|0 have one |1.",
+    "options": [
+      ["i", "you", "we", "they"],
+      ["day", "year", "month"]
+    ]
+  },
+  {
+    "sentence": "|0 |1 |2.",
+    "options": [
+      ["i", "you"],
+      ["go", "come", "stay", "return", "sit"],
+      ["home", "inside"]
+    ]
+  },
+  {
+    "sentence": "|0 |1 |2.",
+    "options": [
+      ["we", "they"],
+      ["buy", "call", "love", "like"],
+      ["cats", "dogs", "birds"]
+    ]
+  },
+  {
+    "sentence": "|0 |1 at |2 o'clock.",
+    "options": [
+      ["i", "you", "we", "they"],
+      ["go", "come", "return"],
+      ["two", "three", "four"]
+    ]
+  },
+  {
+    "sentence": "|0 are |1.",
+    "options": [
+      ["you", "we", "they"],
+      ["teachers", "students", "doctors", "friends"]
+    ]
+  },
+  {
+    "sentence": "|0 drinks |1.",
+    "options": [
+      ["dad", "mom", "it", "she"],
+      ["tea", "coffee", "water", "juice"]
+    ]
+  },
+  {
+    "sentence": "I have |0 |1.",
+    "options": [
+      ["five", "six", "seven", "eight"],
+      ["sons", "daughters", "things", "books"]
+    ]
+  },
+  {
+    "sentence": "|0 eat |1.",
+    "options": [
+      ["Dogs", "Cats", "I"],
+      ["food", "meat", "everything", "vegetables"]
+    ]
+  },
+  {
+    "sentence": "|0 is |1 |2.",
+    "options": [
+      ["He", "She"],
+      ["my", "his", "her", "your"],
+      ["friend", "teacher", "student"]
+    ]
+  },
+  {
+    "sentence": "|0 |1 a |2 person.",
+    "options": [
+      ["He", "She"],
+      ["is", "knows", "sees"],
+      ["good", "big", "small"]
+    ]
+  }
+]

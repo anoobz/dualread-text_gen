@@ -1,5 +1,4 @@
-import json
-import math
+import json, random
 from typing import Any
 
 from analyze import (
@@ -18,8 +17,6 @@ def generate_sentences(
     templates_file_name: str,
     template_start: int,
     template_end: int,
-    start_ratio: float,
-    end_ratio: float,
 ) -> list[str]:
     templates = load_template_file(templates_file_name)[template_start:template_end]
 
@@ -38,11 +35,20 @@ def generate_sentences(
             unfinished_sentences = unfinished_sentences_buffer
         generated_sentences += unfinished_sentences
 
+    return generated_sentences
+
+
+def reduce_sentences(
+    generated_sentences: list[str],
+    start_ratio: float,
+    end_ratio: float,
+):
     selected_sentences = []
     for idx, sentence in enumerate(generated_sentences):
         den = idx * (end_ratio - start_ratio) / len(generated_sentences) + start_ratio
-        mod = idx % (1 / den)
-        if math.floor(mod) == 0:
+        # mod = idx % (1 / den)
+        # if math.floor(mod) == 0:
+        if random.random() <= den:
             selected_sentences.append(sentence)
 
     return selected_sentences

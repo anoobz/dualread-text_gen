@@ -1,0 +1,45 @@
+[
+  {
+    "sentence": "|0 is |1.",
+    "options": [
+      ["this", "it", "that"],
+      ["water", "food", "a cat", "a bird", "a dog"]
+    ]
+  },
+  {
+    "sentence": "|0 have |1.",
+    "options": [
+      ["i", "you", "we", "they"],
+      ["two", "three", "four"]
+    ]
+  },
+  {
+    "sentence": "|0 go |1.",
+    "options": [
+      ["i", "you", "we", "they"],
+      ["this morning", "at noon", "this evening"]
+    ]
+  },
+  {
+    "sentence": "|0 has |1.",
+    "options": [
+      ["he", "she", "it"],
+      ["water", "food", "a cat", "a bird", "a dog"]
+    ]
+  },
+  {
+    "sentence": "|0 gets |1.",
+    "options": [
+      ["the cat", "the dog", "the bird"],
+      ["two", "three", "four"]
+    ]
+  },
+  {
+    "sentence": "|0 |1 |2.",
+    "options": [
+      ["two", "three", "four"],
+      ["good", "bad", "fast", "slow"],
+      ["phones", "computers", "animals"]
+    ]
+  }
+]

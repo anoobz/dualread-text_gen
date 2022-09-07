@@ -51,7 +51,7 @@ class Translater:
             else:
                 translation = self.fetch_translations(sentence)
                 self.mongo_db.insert_translation(
-                    self.target_language_code,
+                    sentence,
                     translation,
                     self.source_language_code,
                     self.target_language_code,
