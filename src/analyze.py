@@ -1,5 +1,5 @@
 import json, re
-from words.hsk1_words import vocab
+from vocab.hsk1_words import vocab_list
 
 output_folder = "analyze"
 
@@ -72,7 +72,7 @@ def analyze_translation(translated_sentences: list[str]):
 
 def get_vocab_word_counts(unique_counts: dict[str, int]):
     vocab_word_counts = {}
-    for word_type, words in vocab.items():
+    for word_type, words in vocab_list.items():
         vocab_word_counts[word_type] = {}
         for word, options in words.items():
             for option in options:

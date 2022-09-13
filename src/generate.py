@@ -1,4 +1,4 @@
-import json, random
+import json, random, math
 from typing import Any
 
 from analyze import (
@@ -44,11 +44,14 @@ def reduce_sentences(
     end_ratio: float,
 ):
     selected_sentences = []
+    sqrt_start_ration = math.sqrt(start_ratio)
+    sqrt_end_ration = math.sqrt(end_ratio)
     for idx, sentence in enumerate(generated_sentences):
-        den = idx * (end_ratio - start_ratio) / len(generated_sentences) + start_ratio
-        # mod = idx % (1 / den)
-        # if math.floor(mod) == 0:
-        if random.random() <= den:
+        dynamic_ratio = (
+            idx * (sqrt_end_ration - sqrt_start_ration) / len(generated_sentences)
+            + sqrt_start_ration
+        )
+        if random.random() <= dynamic_ratio**2:
             selected_sentences.append(sentence)
 
     return selected_sentences

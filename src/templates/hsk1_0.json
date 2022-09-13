@@ -1,8 +1,9 @@
 [
   {
-    "sentence": "|0 have one |1.",
+    "sentence": "|0 have |1 |2.",
     "options": [
       ["i", "you", "we", "they"],
+      ["one", "two"],
       ["day", "year", "month"]
     ]
   },
@@ -54,14 +55,13 @@
   {
     "sentence": "|0 eat |1.",
     "options": [
-      ["Dogs", "Cats", "I"],
+      ["Dogs", "Cats", "I", "You"],
       ["food", "meat", "everything", "vegetables"]
     ]
   },
   {
-    "sentence": "|0 is |1 |2.",
+    "sentence": "He is |0 |1.",
     "options": [
-      ["He", "She"],
       ["my", "his", "her", "your"],
       ["friend", "teacher", "student"]
     ]
@@ -72,6 +72,53 @@
       ["He", "She"],
       ["is", "knows", "sees"],
       ["good", "big", "small"]
+    ]
+  },
+  {
+    "sentence": "|0 |1.",
+    "options": [
+      ["Today is", "Tomorrow will be", "Yesterday was"],
+      [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday"
+      ]
+    ]
+  },
+  {
+    "sentence": "I |0 for |1 |2.",
+    "options": [
+      ["read", "looked", "worked", "did"],
+      ["nine", "ten", "one hundred"],
+      ["weeks", "minutes"]
+    ]
+  },
+  {
+    "sentence": "|0 |1 the |2.",
+    "options": [
+      ["you", "we", "they"],
+      ["listen to", "look at", "buy"],
+      ["TV", "movie"]
+    ]
+  },
+  {
+    "sentence": "|0 |1 |2.",
+    "options": [
+      ["you", "we", "they"],
+      ["can", "will"],
+      ["sleep", "learn", "write", "speak"]
+    ]
+  },
+  {
+    "sentence": "|0 is |1 the |2.",
+    "options": [
+      ["This", "That", "It"],
+      ["on", "under", "next to"],
+      ["table", "chair"]
     ]
   }
 ]
